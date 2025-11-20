@@ -1,9 +1,9 @@
 class Student:
-  def __init__(self, name, age, GPA, id,):
+  def __init__(self, name, age, gpa, student_id,):
       self.name = name 
       self.age = age
-      self.GPA = GPA
-      self.id = id
+      self.gpa = gpa
+      self.student_id = student_id
       self.registered_class = []
       self.completed_class = []
 
@@ -73,3 +73,14 @@ course14 = Course("ENG201", "Advanced Writing", 27)
 course15 = Course("PHY302", "Modern Physics", 21)
 
 
+students_db = {}
+courses_db = {}
+
+def add_student(name, age, gpa,student_id):
+    
+    if student_id in students_db:
+        return f"Error: Student {student_id} already exist"
+    new_student = Student(name, age, gpa, student_id)
+
+    students_db[student_id] = new_student
+    return f"student {name} added sucessfully"
