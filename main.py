@@ -84,3 +84,59 @@ def add_student(name, age, gpa,student_id):
 
     students_db[student_id] = new_student
     return f"student {name} added sucessfully"
+
+def remove_student(student_id):
+    if student_id not in students_db:
+        return f"Error: Student {student_id} not found"
+    
+
+    del students_db[student_id]
+    return f"Student {student_id} removed successfully"
+
+
+def add_course(course_code, course_name, capacity):
+    if course_code in courses_db:
+       return f"Error: course {course_code} already exists" 
+       
+    new_course = Course(course_code, course_name, capacity)
+    courses_db[course_code] = new_course
+    return f"Course {course_name} added successfully"
+
+def remove_course(course_code):
+    if course_code not in courses_db:
+        return f"Error: Course {course_code} not found"
+    
+    del courses_db[course_code]
+    return f"Course {course_code} removed successfully"
+
+print(add_student("John Doe", 20, 3.8, "S1001" ))
+print(add_student("Jane Smith", 22, 3.9, "S1002",))
+
+print(add_course("CS101", "Introduction to Programming", 30))
+print(add_course("MATH201", "Calculus I", 25))
+
+# Verify they're in databases
+print("Students in database:", list(students_db.keys()))
+print("Courses in database:", list(courses_db.keys()))
+
+def find_student(student_id):
+     if student_id in students_db:
+         return students_db [student_id]
+     else:
+          return None
+     
+def find_course(course_code):
+    if course_code in courses_db:
+        return courses_db[course_code]  
+    else:
+        return None
+    
+def search_courses_by_name(keyword) :
+    results = []
+    keyword_lower = keyword.lower()
+    
+    for course in courses_db.values():
+        if keyword_lower in course.course_name.lower():
+            results.append(course)
+    return results
+print("Search 'programming':", [c.course_name for c in search_courses_by_name("programming")])
