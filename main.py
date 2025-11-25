@@ -140,3 +140,23 @@ def search_courses_by_name(keyword) :
             results.append(course)
     return results
 print("Search 'programming':", [c.course_name for c in search_courses_by_name("programming")])
+
+
+def get_availble_course():
+    availble = []
+
+    for course in courses_db.values():
+        if len(course.enrolled_students) < course.capacity:
+            availble.append(course)
+
+    return availble
+
+def get_full_courses():
+  
+    full = []
+    
+    for course in courses_db.values():
+        if len(course.enrolled_students) >= course.capacity:
+            full.append(course)
+    
+    return full
