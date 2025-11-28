@@ -1,3 +1,4 @@
+
 class Student:
   def __init__(self, name, age, gpa, student_id,):
       self.name = name 
@@ -160,3 +161,44 @@ def get_full_courses():
             full.append(course)
     
     return full
+
+import heapq
+
+def get_most_popular_course(limit = 10):
+    if not courses_db or limit <= 0:
+        return[]
+    
+    min_heap = []
+    for course in courses_db.values():
+        if course.capacity > 0:
+            enrollment_ratio = len(course.enrolled_students) / course.capacity
+        else:
+            enrollment_ratio = 0
+        if len(min_heap) < limit:
+
+            heapq.heappush(min_heap, (enrollment_ratio, course))
+        elif enrollment_ratio > min_heap[0][0]:
+            heapq.heapreplace(min_heap, (enrollment_ratio, course))
+    sorted_courses = [course for ratio, course in sorted(min_heap, reverse=True)]
+    return sorted_courses
+
+
+def get_courses_by_availability_status():
+ 
+    status = {
+        'available': [],
+        'full': [],
+        'empty': []
+    }
+    
+    for course in courses_db.values():
+        enrolled_count = len(course.enrolled_students)
+        
+        if enrolled_count == 0:
+            status['empty'].append(course)
+        elif enrolled_count >= course.capacity:
+            status['full'].append(course)
+        else:
+            status['available'].append(course)
+    
+    return status
