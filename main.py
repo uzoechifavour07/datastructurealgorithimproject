@@ -1,3 +1,4 @@
+import heapq
 
 class Student:
   def __init__(self, name, age, gpa, student_id,):
@@ -7,6 +8,18 @@ class Student:
       self.student_id = student_id
       self.registered_class = []
       self.completed_class = []
+
+
+class Course:
+    def __init__(self, course_code, course_name, capacity):
+            self.course_code = course_code
+            self.course_name = course_name
+            self.capacity = capacity
+            self.enrolled_students = []
+
+    def __lt__(self, other):
+        return self.course_code < other.course_code
+
 
 student1 = Student("favour", 21, 4.0, "S1001")
 student2 = Student("eunice", 20, 3.9, "S1002")
@@ -49,13 +62,8 @@ student38 = Student("jackson", 20, 2.3, "S1038")
 student39 = Student("zoey", 24, 1.8, "S1039")
 student40 = Student("sebastian", 21, 3.2, "S1040")
 
-class Course:
-   def __init__(self, course_code, course_name, capacity):
-          self.course_code = course_code
-          self.course_name = course_name
-          self.capacity = capacity
-          self.enrolled_students = []
 
+# Register Courses
 course1 = Course("CS101", "Introduction to Programming", 20)
 course1 = Course("CS101", "Introduction to Programming", 20)
 course2 = Course("MATH201", "Calculus I", 25)
@@ -94,7 +102,6 @@ def remove_student(student_id):
     del students_db[student_id]
     return f"Student {student_id} removed successfully"
 
-
 def add_course(course_code, course_name, capacity):
     if course_code in courses_db:
        return f"Error: course {course_code} already exists" 
@@ -109,11 +116,6 @@ def remove_course(course_code):
     
     del courses_db[course_code]
     return f"Course {course_code} removed successfully"
-
-
-
-
-
 
 def find_student(student_id):
      if student_id in students_db:
@@ -136,9 +138,7 @@ def search_courses_by_name(keyword) :
             results.append(course)
     return results
 
-
-
-def get_availble_course():
+def get_available_course():
     availble = []
 
     for course in courses_db.values():
@@ -157,8 +157,6 @@ def get_full_courses():
     
     return full
 
-import heapq
-
 def get_most_popular_courses(limit = 10):
     if not courses_db or limit <= 0:
         return[]
@@ -170,13 +168,11 @@ def get_most_popular_courses(limit = 10):
         else:
             enrollment_ratio = 0
         if len(min_heap) < limit:
-
             heapq.heappush(min_heap, (enrollment_ratio, course))
         elif enrollment_ratio > min_heap[0][0]:
             heapq.heapreplace(min_heap, (enrollment_ratio, course))
     sorted_courses = [course for ratio, course in sorted(min_heap, reverse=True)]
     return sorted_courses
-
 
 def get_courses_by_availability_status():
  
@@ -231,7 +227,7 @@ def test_search_functions():
     print("Find course CS101:", find_course("CS101").course_name)
     
     print("Search 'programming':", [c.course_name for c in search_courses_by_name("programming")])
-    print("Available courses:", [c.course_code for c in get_available_courses()])
+    print("Available courses:", [c.course_code for c in get_available_course()])
     
  
     status = get_courses_by_availability_status()
