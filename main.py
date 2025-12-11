@@ -10,54 +10,67 @@ class Student:
       self.registered_class = []
       self.completed_class = []
 
-student1 = Student("favour", 21, 4.0, "S1001")
-student2 = Student("eunice", 20, 3.9, "S1002")
-student3 = Student("crispine", 20, 3.8,"S1003")
-student4 = Student("chima", 25, 3.5, "S1004")
-student5 = Student("alex", 18, 2.0, "S1005")
-student6 = Student("jay", 26, 2.1, "S1006")
-student7 = Student("tom", 17, 3.2, "S1007")
-student8 = Student("bradley", 31, 1.1, "S1008")
-student9 = Student("vicky", 22, 2.9, "S1009")
-student10 = Student("ewo", 26, 3.3, "S1010")
-student11 = Student("benjamin", 21, 3.1, "S1011")
-student12 = Student("mia", 22, 3.9, "S1012")
-student13 = Student("lucas", 20, 3.3, "S1013")
-student14 = Student("charlotte", 23, 3.7, "S1014")
-student15 = Student("henry", 19, 3.5, "S1015")
-student16 = Student("amelia", 21, 4.0, "S1016")
-student17 = Student("alexander", 22, 3.6, "S1017")
-student18 = Student("harper", 20, 3.1, "S1018")
-student19 = Student("daniel", 24, 3.2, "S1019")
-student20 = Student("evelyn", 19, 3.9, "S1020")
-student21 = Student("michael", 21, 3.4, "S1021")
-student22 = Student("ethan", 22, 3.7, "S10022")
-student23 = Student("abigail", 20, 2.9, "S1023")
-student24 = Student("matthew", 21, 3.3, "S1024")
-student25 = Student("ella", 23, 3.8, "S1025")
-student26 = Student("samuel", 19, 3.5, "S1026")
-student27 = Student("scarlett", 22, 4.0, "S1027")
-student28 = Student("david", 20, 3.6, "S1028")
-student29 = Student("grace", 24, 3.7, "S1029")
-student30 = Student("joseph", 21, 2.2, "S1030")
-student31 = Student("chloe", 19, 3.9, "S1031")
-student32 = Student("carter", 22, 3.4, "S1032")
-student33 = Student("victoria", 20, 3.8, "S1033")
-student34 = Student("john", 23, 1.1, "S1034")
-student35 = Student("riley", 21, 3.7, "S1035")
-student36 = Student("owen", 19, 2.5, "S1036")
-student37 = Student("aubrey", 22, 3.9, "S1037")
-student38 = Student("jackson", 20, 2.3, "S1038")
-student39 = Student("zoey", 24, 1.8, "S1039")
-student40 = Student("sebastian", 21, 3.2, "S1040")
+def has_completed(self, course_code):
+        return any(course.course_code == course_code for course in self.completed_courses)
+
+
 
 class Course:
-   def __init__(self, course_code, course_name, capacity):
-          self.course_code = course_code
-          self.course_name = course_name
-          self.capacity = capacity
-          self.enrolled_students = []
+    def __init__(self, course_code, course_name, capacity,prerequisites=None):
+            self.course_code = course_code
+            self.course_name = course_name
+            self.capacity = capacity
+            self.enrolled_students = []
+            self.prerequisites = prerequisites or [] 
 
+    def __lt__(self, other):
+        return self.course_code < other.course_code
+
+
+
+student1 = Student("favour", 21, 4.0, "S1001", prerequisites=[])
+student2 = Student("eunice", 20, 3.9, "S1002", prerequisites=[])
+student3 = Student("crispine", 20, 3.8,"S1003", prerequisites=[])
+student4 = Student("chima", 25, 3.5, "S1004", prerequisites=[])
+student5 = Student("alex", 18, 2.0, "S1005", prerequisites=[])
+student6 = Student("jay", 26, 2.1, "S1006", prerequisites=[])
+student7 = Student("tom", 17, 3.2, "S1007", prerequisites=[])
+student8 = Student("bradley", 31, 1.1, "S1008", prerequisites=[])
+student9 = Student("vicky", 22, 2.9, "S1009", prerequisites=[])
+student10 = Student("ewo", 26, 3.3, "S1010", prerequisites=[])
+student11 = Student("benjamin", 21, 3.1, "S1011", prerequisites=[])
+student12 = Student("mia", 22, 3.9, "S1012", prerequisites=[])
+student13 = Student("lucas", 20, 3.3, "S1013", prerequisites=[])
+student14 = Student("charlotte", 23, 3.7, "S1014", prerequisites=[])
+student15 = Student("henry", 19, 3.5, "S1015", prerequisites=[])
+student16 = Student("amelia", 21, 4.0, "S1016", prerequisites=[])
+student17 = Student("alexander", 22, 3.6, "S1017", prerequisites=[])
+student18 = Student("harper", 20, 3.1, "S1018", prerequisites=[])
+student19 = Student("daniel", 24, 3.2, "S1019", prerequisites=[])
+student20 = Student("evelyn", 19, 3.9, "S1020", prerequisites=[])
+student21 = Student("michael", 21, 3.4, "S1021", prerequisites=[])
+student22 = Student("ethan", 22, 3.7, "S10022", prerequisites=[])
+student23 = Student("abigail", 20, 2.9, "S1023", prerequisites=[])
+student24 = Student("matthew", 21, 3.3, "S1024", prerequisites=[])
+student25 = Student("ella", 23, 3.8, "S1025", prerequisites=[])
+student26 = Student("samuel", 19, 3.5, "S1026", prerequisites=[])
+student27 = Student("scarlett", 22, 4.0, "S1027", prerequisites=[])
+student28 = Student("david", 20, 3.6, "S1028", prerequisites=[])
+student29 = Student("grace", 24, 3.7, "S1029", prerequisites=[])
+student30 = Student("joseph", 21, 2.2, "S1030", prerequisites=[])
+student31 = Student("chloe", 19, 3.9, "S1031", prerequisites=[])
+student32 = Student("carter", 22, 3.4, "S1032", prerequisites=[])
+student33 = Student("victoria", 20, 3.8, "S1033", prerequisites=[])
+student34 = Student("john", 23, 1.1, "S1034", prerequisites=[])
+student35 = Student("riley", 21, 3.7, "S1035", prerequisites=[])
+student36 = Student("owen", 19, 2.5, "S1036", prerequisites=[])
+student37 = Student("aubrey", 22, 3.9, "S1037", prerequisites=[])
+student38 = Student("jackson", 20, 2.3, "S1038", prerequisites=[])
+student39 = Student("zoey", 24, 1.8, "S1039", prerequisites=[])
+student40 = Student("sebastian", 21, 3.2, "S1040", prerequisites=[])
+
+
+# Register Courses
 course1 = Course("CS101", "Introduction to Programming", 20)
 course1 = Course("CS101", "Introduction to Programming", 20)
 course2 = Course("MATH201", "Calculus I", 25)
